@@ -41,7 +41,8 @@ export const GALAXY_NODES: GalaxyNode[] = [
     title: "crystal-galaxy",
     kind: "github",
     href: "https://github.com/SpaceBum9/crystal-galaxy",
-    summary: "BILO 2026 · DualEntangled Kreuzkopplung, SAI traceback, automated context.",
+    summary:
+      "BILO 2026 · DualEntangled Kreuzkopplung, SAI traceback, automated context.",
     owner: "SpaceBum9",
     lang: "TypeScript",
   },
@@ -99,11 +100,29 @@ export const GALAXY_NODES: GalaxyNode[] = [
     owner: "Michael Schulik",
   },
   {
+    id: "kernel-ausbau",
+    title: "Kernel Ausbau 2026-08-19",
+    kind: "drive",
+    href: "https://docs.google.com/document/d/1nu_64gRvT57n0nxN_PDa3wwqu9zkgzZUVkt2Ad6ba1s/edit",
+    summary:
+      "Ausbau-Anker: Kommandozentrale, Connectoren, Kernel-Dateien, Grenzen.",
+    owner: "Michael Schulik",
+  },
+  {
+    id: "kernel-ausbau-ii",
+    title: "Kernel Ausbau 2026-08-19 II",
+    kind: "drive",
+    href: "https://docs.google.com/document/d/1Ll2rMaAl6k1WTK5z5T_JF1YmqcDremr62rHftsddgbg/edit",
+    summary: "Ausbau II: Live-Puls, HF-Import-Korridor, Kommandozentrale.",
+    owner: "Michael Schulik",
+  },
+  {
     id: "hf-kreuzkopplung",
     title: "SpaceBum9/kreuzkopplung",
     kind: "huggingface",
     href: "https://huggingface.co/spaces/SpaceBum9/kreuzkopplung",
-    summary: "Geplanter Gradio-Space. Import aus dem GitHub-Kern kreuzkopplung.",
+    summary:
+      "Gradio-Space-Import aus dem GitHub-Kern kreuzkopplung. Status live prüfen.",
     owner: "SpaceBum9",
   },
 ];
@@ -127,18 +146,24 @@ export function detectTargetNode(query: string): string {
   if (q.includes("mike") || q.includes("ursprung") || q.includes("anchor")) {
     return "crystal-mike";
   }
-  if (q.includes("kreuz") || q.includes("dual") || q.includes("regler") || q.includes("lab")) {
-    return "kreuzkopplung";
+  if (q.includes("hugging") || q.includes("gradio") || q.includes("hf ") || q.includes("import")) {
+    return "hf-kreuzkopplung";
   }
   if (q.includes("mesh") || q.includes("mcp") || q.includes("mct") || q.includes("zerotier")) {
     return "mct-170021";
   }
+  if (
+    q.includes("kreuz") ||
+    q.includes("dual") ||
+    q.includes("regler") ||
+    q.includes("lab")
+  ) {
+    return "kreuzkopplung";
+  }
+  if (q.includes("ausbau")) return "kernel-ausbau";
   if (q.includes("kernel") || q.includes("status")) return "kernel-status";
   if (q.includes("drive") || q.includes("orchest") || q.includes("schema")) {
     return "automat-orchestrieren";
-  }
-  if (q.includes("hugging") || q.includes("gradio") || q.includes("space")) {
-    return "hf-kreuzkopplung";
   }
   if (q.includes("echo") || q.includes("jonas")) return "jonas-g";
   if (q.includes("plasma") || q.includes("dienst")) return "plasma-toxogon";
