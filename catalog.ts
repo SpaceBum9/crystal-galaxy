@@ -8,7 +8,16 @@ export type GalaxyNode = {
   summary: string;
   owner?: string;
   lang?: string;
+  private?: boolean;
 };
+
+export const SAI_STEPS = [
+  "Quelle",
+  "Crystal Mike",
+  "HAL",
+  "Zielknoten",
+  "Reinforcement",
+] as const;
 
 export const GALAXY_NODES: GalaxyNode[] = [
   {
@@ -23,7 +32,7 @@ export const GALAXY_NODES: GalaxyNode[] = [
     id: "hal",
     title: "HAL",
     kind: "core",
-    href: "/",
+    href: "/hal",
     summary: "Offener Kern für alle. Schemafest, nüchtern, Dienstleister-Schicht.",
     owner: "Crystal Galaxy",
   },
@@ -70,6 +79,7 @@ export const GALAXY_NODES: GalaxyNode[] = [
     summary: "ECHOGLAS. Privat. Keine Rohbeweise im offenen Graph.",
     owner: "SpaceBum9",
     lang: "Python",
+    private: true,
   },
   {
     id: "automat-orchestrieren",
@@ -81,14 +91,24 @@ export const GALAXY_NODES: GalaxyNode[] = [
     owner: "Michael Schulik",
   },
   {
+    id: "kernel-status",
+    title: "Crystal Galaxy Kernel Status",
+    kind: "drive",
+    href: "https://docs.google.com/document/d/1RwX-s8YOlTTTz28XUDYzQAJyBiRinnLjBn7u7lV7-0A/edit",
+    summary: "Live-Kernel: Ausbau, Connectoren, Grenzen. Täglicher Anker in Drive.",
+    owner: "Michael Schulik",
+  },
+  {
     id: "hf-kreuzkopplung",
     title: "SpaceBum9/kreuzkopplung",
     kind: "huggingface",
-    href: "https://huggingface.co/spaces",
+    href: "https://huggingface.co/spaces/SpaceBum9/kreuzkopplung",
     summary: "Geplanter Gradio-Space. Import aus dem GitHub-Kern kreuzkopplung.",
     owner: "SpaceBum9",
   },
 ];
+
+export const GALAXY = GALAXY_NODES;
 
 export const KIND_LABEL: Record<NodeKind, string> = {
   core: "Kern",
@@ -98,14 +118,22 @@ export const KIND_LABEL: Record<NodeKind, string> = {
   mesh: "Mesh",
 };
 
+export function nodeById(id: string): GalaxyNode | undefined {
+  return GALAXY_NODES.find((n) => n.id === id);
+}
+
 export function detectTargetNode(query: string): string {
   const q = query.toLowerCase();
+  if (q.includes("mike") || q.includes("ursprung") || q.includes("anchor")) {
+    return "crystal-mike";
+  }
   if (q.includes("kreuz") || q.includes("dual") || q.includes("regler") || q.includes("lab")) {
     return "kreuzkopplung";
   }
   if (q.includes("mesh") || q.includes("mcp") || q.includes("mct") || q.includes("zerotier")) {
     return "mct-170021";
   }
+  if (q.includes("kernel") || q.includes("status")) return "kernel-status";
   if (q.includes("drive") || q.includes("orchest") || q.includes("schema")) {
     return "automat-orchestrieren";
   }
@@ -114,6 +142,22 @@ export function detectTargetNode(query: string): string {
   }
   if (q.includes("echo") || q.includes("jonas")) return "jonas-g";
   if (q.includes("plasma") || q.includes("dienst")) return "plasma-toxogon";
-  if (q.includes("github") || q.includes("repo")) return "crystal-galaxy";
+  if (q.includes("github") || q.includes("repo") || q.includes("galaxy")) {
+    return "crystal-galaxy";
+  }
   return "hal";
 }
+
+export function resolveTarget(text: string): GalaxyNode {
+  return nodeById(detectTargetNode(text)) ?? nodeById("hal")!;
+}
+
+export const GITHUB_REPOS = [
+  "crystal-galaxy",
+  "kreuzkopplung",
+  "mct-170021-zero-tier-quantum-skills-tools-mcp-connectors",
+  "plasma-toxogon",
+] as const;
+
+export const HF_OWNER = "SpaceBum9";
+export const GH_OWNER = "SpaceBum9";
