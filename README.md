@@ -28,6 +28,7 @@ Crystal Mike ist der Ursprungs-Kristall (semantic anchor), kein Avatar.
 
 - [kreuzkopplung](https://github.com/SpaceBum9/kreuzkopplung) — Zwei-Kanal-Regler, Gradio-Space-Quelle
 - [mct-170021](https://github.com/SpaceBum9/mct-170021-zero-tier-quantum-skills-tools-mcp-connectors) — Mesh / MCP
+- [MCT-2600027-CMD](https://github.com/SpaceBum9/MCT-2600027-CMD) — iOS-Eingliederung, Apple Intelligence, Lumen
 - [Jonas-G.](https://github.com/SpaceBum9/Jonas-G.) — ECHOGLAS (privat, keine Rohbeweise)
 - [plasma-toxogon](https://github.com/SpaceBum9/plasma-toxogon) — Dienstleister für alle
 - Drive: [Automat Orchestrieren](https://docs.google.com/document/d/1HoJ07dgtlxOWBnpB3dl11p9AcFADSa5dlW5w8VfDrnA/edit)
