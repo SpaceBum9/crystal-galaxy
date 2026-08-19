@@ -18,11 +18,11 @@ Crystal Mike ist der Ursprungs-Kristall (semantic anchor), kein Avatar.
 | --- | --- |
 | `entangled.ts` | TypeScript-Port von `DualEntangledSystem.run()` (kreuzkopplung) |
 | `catalog.ts` | Galaxy-Knoten + GitHub / Drive / Hugging Face + `resolveTarget` |
-| `connectors.ts` | GitHub-Puls, Drive-Anker, Hugging-Face-Import-Manifest |
-| `constitution.ts` | Verfassungskristalle + HAL-Systemprompt |
+| `constitution.ts` | Verfassungskristalle + HAL-Systemprompt + Live-Puls |
 | `sai.ts` | SAI-Trace: Quelle → Crystal Mike → HAL → Zielknoten → Reinforcement |
-| `reinforce.ts` | Automated context. `+1` × 1.15, `−1` × 0.75, schwerste zuerst |
+| `reinforce.ts` | Automated + live context. `+1` × 1.15, `−1` × 0.75, schwerste zuerst |
 | `orchestrator.ts` | AutomatonCommand-Schema, lokaler Mesh-Dispatch, ECHOGLAS-Sperre |
+| `mesh.ts` | Drive-Anker, Hugging-Face-Status, MCT-Umgebung |
 
 ## Connectoren
 
@@ -33,11 +33,11 @@ Crystal Mike ist der Ursprungs-Kristall (semantic anchor), kein Avatar.
 - Drive: [Automat Orchestrieren](https://docs.google.com/document/d/1HoJ07dgtlxOWBnpB3dl11p9AcFADSa5dlW5w8VfDrnA/edit)
 - Drive: [Kernel Status](https://docs.google.com/document/d/1RwX-s8YOlTTTz28XUDYzQAJyBiRinnLjBn7u7lV7-0A/edit)
 - Drive: [Kernel Ausbau](https://docs.google.com/document/d/1nu_64gRvT57n0nxN_PDa3wwqu9zkgzZUVkt2Ad6ba1s/edit)
-- Hugging Face: Import `SpaceBum9/kreuzkopplung` → Gradio Space (`app.py`)
+- Hugging Face: Import `SpaceBum9/kreuzkopplung` → Gradio Space (noch nicht deployed)
 
 ## Reinforcement
 
-HAL liest die schwersten Kristalle zuerst. `+1` × 1.15, `−1` × 0.75. Kontext wird gewählt, er driftet nicht.
+HAL liest die schwersten Kristalle zuerst. `+1` × 1.15, `−1` × 0.75. Live-Puls der öffentlichen Repos fließt in den Kontext. Kontext wird gewählt, er driftet nicht.
 
 ## Grenzen
 
