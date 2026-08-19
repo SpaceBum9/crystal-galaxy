@@ -1,122 +1,119 @@
-export type NodeKind =
-  | "origin"
-  | "core"
-  | "github"
-  | "drive"
-  | "huggingface"
-  | "lab"
-  | "ops"
-  | "mesh";
+export type NodeKind = "core" | "github" | "drive" | "huggingface" | "mesh";
 
 export type GalaxyNode = {
   id: string;
-  name: string;
+  title: string;
   kind: NodeKind;
-  blurb: string;
-  href?: string;
-  route: string;
+  href: string;
+  summary: string;
   owner?: string;
+  lang?: string;
 };
 
-export const GALAXY: GalaxyNode[] = [
+export const GALAXY_NODES: GalaxyNode[] = [
   {
     id: "crystal-mike",
-    name: "Crystal Mike",
-    kind: "origin",
-    blurb: "Ursprungs-Kristall. Semantic Anchor jeder SAI-Trace-Route. Kein Avatar.",
-    route: "/",
+    title: "Crystal Mike",
+    kind: "core",
+    href: "/",
+    summary: "Ursprungs-Kristall. Semantic Anchor. Jede SAI-Route beginnt hier.",
+    owner: "BILO 2026",
   },
   {
     id: "hal",
-    name: "HAL",
+    title: "HAL",
     kind: "core",
-    blurb: "Offener Kern. HAL for everybody — Dienstleister, kein Thron.",
-    route: "/hal",
+    href: "/",
+    summary: "Offener Kern für alle. Schemafest, nüchtern, Dienstleister-Schicht.",
+    owner: "Crystal Galaxy",
   },
   {
     id: "crystal-galaxy",
-    name: "crystal-galaxy",
+    title: "crystal-galaxy",
     kind: "github",
-    owner: "SpaceBum9",
-    blurb: "BILO 2026 Kommandozentrale. DualEntangled, SAI traceback, automated context.",
     href: "https://github.com/SpaceBum9/crystal-galaxy",
-    route: "/galaxy",
+    summary: "BILO 2026 · DualEntangled Kreuzkopplung, SAI traceback, automated context.",
+    owner: "SpaceBum9",
+    lang: "TypeScript",
   },
   {
     id: "kreuzkopplung",
-    name: "kreuzkopplung",
-    kind: "lab",
-    owner: "SpaceBum9",
-    blurb: "Zwei-Kanal-Regler DualEntangledSystem.run(). Klassisch, nicht quantenmechanisch.",
+    title: "kreuzkopplung",
+    kind: "github",
     href: "https://github.com/SpaceBum9/kreuzkopplung",
-    route: "/lab",
-  },
-  {
-    id: "hf-kreuzkopplung",
-    name: "Hugging Face Space",
-    kind: "huggingface",
-    blurb: "Import SpaceBum9/kreuzkopplung → Gradio Space. Dieselbe run()-Schleife.",
-    href: "https://huggingface.co/new-space",
-    route: "/galaxy",
+    summary: "DualEntangledSystem — adaptiver Zwei-Kanal-Regler mit run().",
+    owner: "SpaceBum9",
+    lang: "Python",
   },
   {
     id: "mct-170021",
-    name: "MCT-170021",
+    title: "MCT-170021",
     kind: "mesh",
-    owner: "SpaceBum9",
-    blurb: "Zero-Tier mesh, Euclidean sequencer, MCP-Connectoren. Keine Anthropomorphie.",
     href: "https://github.com/SpaceBum9/mct-170021-zero-tier-quantum-skills-tools-mcp-connectors",
-    route: "/orchestrate",
-  },
-  {
-    id: "echoglas",
-    name: "ECHOGLAS",
-    kind: "ops",
+    summary: "Zero-Tier Quantum Skills, MCP-Connectoren, Mesh-Control-Plane.",
     owner: "SpaceBum9",
-    blurb: "Jonas-G. Fiktive Ops. Keine Rohbeweise, keine Credentials, keine Destruktion.",
-    href: "https://github.com/SpaceBum9/Jonas-G.",
-    route: "/constitution",
+    lang: "Python",
   },
   {
     id: "plasma-toxogon",
-    name: "plasma-toxogon",
-    kind: "ops",
-    owner: "SpaceBum9",
-    blurb: "Der Dienstleister für alle. Flowchart, Anarcho-Archiv, Steuer-für-teuer.",
+    title: "plasma-toxogon",
+    kind: "github",
     href: "https://github.com/SpaceBum9/plasma-toxogon",
-    route: "/galaxy",
+    summary: "Der Dienstleister für alle — Flowchart, Anarcho-Archiv.",
+    owner: "SpaceBum9",
   },
   {
-    id: "automat",
-    name: "Automat Orchestrieren",
+    id: "jonas-g",
+    title: "Jonas-G.",
+    kind: "github",
+    href: "https://github.com/SpaceBum9/Jonas-G.",
+    summary: "ECHOGLAS. Privat. Keine Rohbeweise im offenen Graph.",
+    owner: "SpaceBum9",
+    lang: "Python",
+  },
+  {
+    id: "automat-orchestrieren",
+    title: "Automat Orchestrieren",
     kind: "drive",
-    blurb: "Control plane, Semantic Anchoring, JSON-Schema, Zero-Trust Mesh.",
     href: "https://docs.google.com/document/d/1HoJ07dgtlxOWBnpB3dl11p9AcFADSa5dlW5w8VfDrnA/edit",
-    route: "/orchestrate",
+    summary:
+      "Drive-Anker: Control Plane, Semantic Anchoring, Zero-Trust Mesh, Schema-Validierung.",
+    owner: "Michael Schulik",
+  },
+  {
+    id: "hf-kreuzkopplung",
+    title: "SpaceBum9/kreuzkopplung",
+    kind: "huggingface",
+    href: "https://huggingface.co/spaces",
+    summary: "Geplanter Gradio-Space. Import aus dem GitHub-Kern kreuzkopplung.",
+    owner: "SpaceBum9",
   },
 ];
 
-export const SAI_STEPS = [
-  "Quelle",
-  "Crystal Mike",
-  "HAL",
-  "Zielknoten",
-  "Reinforcement",
-] as const;
+export const KIND_LABEL: Record<NodeKind, string> = {
+  core: "Kern",
+  github: "GitHub",
+  drive: "Drive",
+  huggingface: "Hugging Face",
+  mesh: "Mesh",
+};
 
-export type SaiStep = (typeof SAI_STEPS)[number];
-
-export function nodeById(id: string) {
-  return GALAXY.find((n) => n.id === id);
-}
-
-export function resolveTarget(text: string): GalaxyNode {
-  const hay = text.toLowerCase();
-  const hits = GALAXY.filter((n) => n.id !== "crystal-mike" && n.id !== "hal").map((n) => {
-    const keys = [n.id, n.name, n.kind, n.owner ?? ""].join(" ").toLowerCase();
-    const score = keys.split(/\s+/).reduce((acc, w) => (w && hay.includes(w) ? acc + 1 : acc), 0);
-    return { n, score };
-  });
-  hits.sort((a, b) => b.score - a.score);
-  return hits[0] && hits[0].score > 0 ? hits[0].n : GALAXY.find((n) => n.id === "hal")!;
+export function detectTargetNode(query: string): string {
+  const q = query.toLowerCase();
+  if (q.includes("kreuz") || q.includes("dual") || q.includes("regler") || q.includes("lab")) {
+    return "kreuzkopplung";
+  }
+  if (q.includes("mesh") || q.includes("mcp") || q.includes("mct") || q.includes("zerotier")) {
+    return "mct-170021";
+  }
+  if (q.includes("drive") || q.includes("orchest") || q.includes("schema")) {
+    return "automat-orchestrieren";
+  }
+  if (q.includes("hugging") || q.includes("gradio") || q.includes("space")) {
+    return "hf-kreuzkopplung";
+  }
+  if (q.includes("echo") || q.includes("jonas")) return "jonas-g";
+  if (q.includes("plasma") || q.includes("dienst")) return "plasma-toxogon";
+  if (q.includes("github") || q.includes("repo")) return "crystal-galaxy";
+  return "hal";
 }
