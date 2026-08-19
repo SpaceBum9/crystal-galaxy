@@ -64,6 +64,15 @@ export const GALAXY_NODES: GalaxyNode[] = [
     lang: "Python",
   },
   {
+    id: "mct-2600027-cmd",
+    title: "MCT-2600027-CMD",
+    kind: "mesh",
+    href: "https://github.com/SpaceBum9/MCT-2600027-CMD",
+    summary: "iOS-Eingliederung mit Apple Intelligence. Skill + Lumen Studio (Writing Tools, Image Playground, App Intents).",
+    owner: "SpaceBum9",
+    lang: "TypeScript",
+  },
+  {
     id: "plasma-toxogon",
     title: "plasma-toxogon",
     kind: "github",
@@ -146,6 +155,15 @@ export function detectTargetNode(query: string): string {
   if (q.includes("kreuz") || q.includes("dual") || q.includes("regler") || q.includes("lab")) {
     return "kreuzkopplung";
   }
+  if (
+    q.includes("2600027") ||
+    q.includes("lumen") ||
+    q.includes("apple intelligence") ||
+    q.includes("writing tools") ||
+    q.includes("eingliederung")
+  ) {
+    return "mct-2600027-cmd";
+  }
   if (q.includes("mesh") || q.includes("mcp") || q.includes("mct") || q.includes("zerotier")) {
     return "mct-170021";
   }
@@ -173,6 +191,7 @@ export const GITHUB_REPOS = [
   "crystal-galaxy",
   "kreuzkopplung",
   "mct-170021-zero-tier-quantum-skills-tools-mcp-connectors",
+  "MCT-2600027-CMD",
   "plasma-toxogon",
 ] as const;
 
