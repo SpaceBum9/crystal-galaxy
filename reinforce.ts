@@ -11,6 +11,26 @@ export type Weighted = {
   hits: number;
 };
 
+export type PulseRepo = {
+  name: string;
+  description: string;
+  language: string | null;
+  pushedAt: string;
+  htmlUrl: string;
+  openIssues: number;
+  lastMessage: string | null;
+};
+
+export type HfPulse = {
+  id: string;
+  exists: boolean;
+  runtime: string | null;
+  likes: number | null;
+  lastModified: string | null;
+  url: string;
+  note: string;
+};
+
 export function applyVote(weight: number, delta: 1 | -1) {
   const next = delta === 1 ? weight * UP_FACTOR : weight * DOWN_FACTOR;
   return Math.min(32, Math.max(0.05, next));
@@ -32,6 +52,35 @@ export function buildAutomatedContext(items: Weighted[], limit = 6) {
       (c, i) =>
         `${i + 1}. [${formatWeight(c.weight)} · hits ${c.hits}] ${c.title} (${c.source})\n${c.body}`,
     )
+    .join("\n\n");
+}
+
+export function buildLiveContext(opts: {
+  crystals: Weighted[];
+  pulse?: PulseRepo[];
+  hf?: HfPulse | null;
+  limit?: number;
+}) {
+  const crystals = buildAutomatedContext(opts.crystals, opts.limit ?? 6);
+  const pulse = (opts.pulse ?? [])
+    .slice(0, 4)
+    .map((r) => {
+      const msg = r.lastMessage ? ` — ${r.lastMessage}` : "";
+      return `- ${r.name} (${r.language ?? "—"}) ${r.pushedAt}${msg}`;
+    })
+    .join("\n");
+  const hf = opts.hf
+    ? opts.hf.exists
+      ? `- Hugging Face ${opts.hf.id} runtime=${opts.hf.runtime ?? "?"} likes=${opts.hf.likes ?? 0}`
+      : `- Hugging Face ${opts.hf.id}: ${opts.hf.note}`
+    : "";
+  return [
+    "AUTOMATED CONTEXT (schwerste Kristalle zuerst)",
+    crystals,
+    pulse ? `\nLIVE GITHUB PULS\n${pulse}` : "",
+    hf ? `\nHUGGING FACE\n${hf}` : "",
+  ]
+    .filter(Boolean)
     .join("\n\n");
 }
 
