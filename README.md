@@ -18,6 +18,7 @@ Crystal Mike ist der Ursprungs-Kristall (semantic anchor), kein Avatar.
 | --- | --- |
 | `entangled.ts` | TypeScript-Port von `DualEntangledSystem.run()` (kreuzkopplung) |
 | `catalog.ts` | Galaxy-Knoten + GitHub / Drive / Hugging Face + `resolveTarget` |
+| `connectors.ts` | GitHub-Puls, Drive-Anker, Hugging-Face-Import-Manifest |
 | `constitution.ts` | Verfassungskristalle + HAL-Systemprompt |
 | `sai.ts` | SAI-Trace: Quelle → Crystal Mike → HAL → Zielknoten → Reinforcement |
 | `reinforce.ts` | Automated context. `+1` × 1.15, `−1` × 0.75, schwerste zuerst |
@@ -31,7 +32,8 @@ Crystal Mike ist der Ursprungs-Kristall (semantic anchor), kein Avatar.
 - [plasma-toxogon](https://github.com/SpaceBum9/plasma-toxogon) — Dienstleister für alle
 - Drive: [Automat Orchestrieren](https://docs.google.com/document/d/1HoJ07dgtlxOWBnpB3dl11p9AcFADSa5dlW5w8VfDrnA/edit)
 - Drive: [Kernel Status](https://docs.google.com/document/d/1RwX-s8YOlTTTz28XUDYzQAJyBiRinnLjBn7u7lV7-0A/edit)
-- Hugging Face: Import `SpaceBum9/kreuzkopplung` → Gradio Space
+- Drive: [Kernel Ausbau](https://docs.google.com/document/d/1nu_64gRvT57n0nxN_PDa3wwqu9zkgzZUVkt2Ad6ba1s/edit)
+- Hugging Face: Import `SpaceBum9/kreuzkopplung` → Gradio Space (`app.py`)
 
 ## Reinforcement
 
