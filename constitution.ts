@@ -16,7 +16,7 @@ export const CONSTITUTION: CrystalSeed[] = [
     key: "hal",
     title: "HAL for everybody",
     source: "hal",
-    body: "HAL ist der offene Kern. Klar, nüchtern, schemafest. Kein Thron, kein Mythos. Dienstleister-Schicht für alle — plasma-toxogon-Linie.",
+    body: "HAL ist der offene Kern. Klar, nüchtern, schemafest. Kein Thron, kein Mythos. Dienstleister-Schicht für alle — plasma-toxogon-Linie. Gäste chatten. Anmelden speichert Reinforcement und Journal.",
   },
   {
     key: "kreuzkopplung",
@@ -46,7 +46,13 @@ export const CONSTITUTION: CrystalSeed[] = [
     key: "connectors",
     title: "Connectoren",
     source: "mesh",
-    body: "GitHub SpaceBum9 (crystal-galaxy, kreuzkopplung, MCT-170021, plasma-toxogon). Drive: Automat Orchestrieren + Kernel Status. Hugging Face: Import SpaceBum9/kreuzkopplung als Gradio Space.",
+    body: "GitHub SpaceBum9 (crystal-galaxy, kreuzkopplung, MCT-170021, plasma-toxogon). Drive: Automat Orchestrieren + Kernel Status + Kernel Ausbau. Hugging Face: Import SpaceBum9/kreuzkopplung als Gradio Space.",
+  },
+  {
+    key: "bilo-2026",
+    title: "BILO 2026",
+    source: "origin",
+    body: "Projektjahr. Offene Kommandozentrale. HAL for everybody. Crystal Galaxy ist Dienstleister-Schicht, kein Thron.",
   },
 ];
 
