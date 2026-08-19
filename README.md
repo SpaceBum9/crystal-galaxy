@@ -19,6 +19,9 @@ Crystal Mike ist der Ursprungs-Kristall (semantic anchor), kein Avatar.
 | `entangled.ts` | TypeScript-Port von `DualEntangledSystem.run()` (kreuzkopplung) |
 | `catalog.ts` | Galaxy-Knoten + GitHub / Drive / Hugging Face |
 | `constitution.ts` | Verfassungskristalle + HAL-Systemprompt |
+| `sai.ts` | SAI-Trace: Quelle → Crystal Mike → HAL → Zielknoten → Reinforcement |
+| `reinforce.ts` | Automated context. `+1` × 1.15, `−1` × 0.75 |
+| `orchestrator.ts` | AutomatonCommand-Schema, lokaler Mesh-Dispatch |
 
 ## Connectoren
 
