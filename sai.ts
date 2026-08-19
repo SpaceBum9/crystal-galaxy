@@ -1,4 +1,4 @@
-import { GALAXY, SAI_STEPS, type GalaxyNode, resolveTarget } from "./catalog";
+import { GALAXY, SAI_STEPS, nodeById, resolveTarget, type GalaxyNode } from "./catalog";
 
 export type SaiTrace = {
   source: string;
@@ -11,17 +11,23 @@ export type SaiTrace = {
 
 export function buildTrace(source: string, text: string, targetId?: string): SaiTrace {
   const target: GalaxyNode =
-    (targetId ? GALAXY.find((n) => n.id === targetId) : undefined) ?? resolveTarget(text);
+    (targetId ? nodeById(targetId) : undefined) ?? resolveTarget(text);
   return {
     source: source.trim() || "operator",
     origin: "Crystal Mike",
     core: "HAL",
     targetId: target.id,
-    targetName: target.name,
-    path: [...SAI_STEPS.slice(0, 3), target.name, SAI_STEPS[4]],
+    targetName: target.title,
+    path: [source.trim() || "operator", SAI_STEPS[1], SAI_STEPS[2], target.title, SAI_STEPS[4]],
   };
 }
 
 export function traceLine(t: SaiTrace) {
   return t.path.join(" → ");
 }
+
+export function defaultTrace(): SaiTrace {
+  return buildTrace("operator", "HAL");
+}
+
+export { GALAXY, SAI_STEPS };
