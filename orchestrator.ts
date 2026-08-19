@@ -25,7 +25,9 @@ export type DispatchResult =
 
 const ID_RE = /^[a-zA-Z0-9._:-]{1,64}$/;
 
-export function parseCommand(raw: unknown): { ok: true; command: AutomatonCommand } | { ok: false; error: string } {
+export function parseCommand(
+  raw: unknown,
+): { ok: true; command: AutomatonCommand } | { ok: false; error: string } {
   if (!raw || typeof raw !== "object") return { ok: false, error: "Payload muss ein Objekt sein." };
   const o = raw as Record<string, unknown>;
   if (typeof o.automaton_id !== "string" || !ID_RE.test(o.automaton_id)) {
@@ -42,7 +44,11 @@ export function parseCommand(raw: unknown): { ok: true; command: AutomatonComman
   }
   let threshold: number | undefined;
   if (params.stability_threshold !== undefined) {
-    if (typeof params.stability_threshold !== "number" || params.stability_threshold < 0 || params.stability_threshold > 1) {
+    if (
+      typeof params.stability_threshold !== "number" ||
+      params.stability_threshold < 0 ||
+      params.stability_threshold > 1
+    ) {
       return { ok: false, error: "stability_threshold muss in [0, 1] liegen." };
     }
     threshold = params.stability_threshold;
@@ -62,11 +68,18 @@ export function parseCommand(raw: unknown): { ok: true; command: AutomatonComman
 
 export function euclideanSequence(start: number, end: number, step = 1) {
   const seq: number[] = [];
-  for (let x = start; x <= end; x += step) seq.push(Number(x.toFixed(4)));
+  const safe = step === 0 ? 1 : step;
+  for (let x = start; x <= end + 1e-9; x += safe) seq.push(Number(x.toFixed(4)));
   return seq;
 }
 
 export function dispatchLocal(command: AutomatonCommand): DispatchResult {
+  if (command.action === "halt" && command.parameters.target_node === "jonas-g") {
+    return {
+      status: "rejected",
+      error: "ECHOGLAS: keine destruktiven Automationen auf privaten Knoten.",
+    };
+  }
   const span = command.parameters.stability_threshold ?? 0.25;
   const seq = euclideanSequence(0, 1, Math.max(0.1, 1 - span) / 4);
   return {
