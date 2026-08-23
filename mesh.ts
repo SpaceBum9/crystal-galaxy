@@ -48,4 +48,4 @@ export type ConnectorPulse = {
 
 export const HF_SPACE_URL = "https://huggingface.co/spaces/SpaceBum9/kreuzkopplung";
 export const HF_IMPORT_NOTE =
-  "Space noch nicht deployed. Import: GitHub SpaceBum9/kreuzkopplung → Gradio Space (app.py + dual_entangled.py).";
+  "Hugging Face SpaceBum9 is ABSENT (404). Space not deployed. Import source: GitHub SpaceBum9/kreuzkopplung (app.py + dual_entangled.py). Do not claim the Space is live.";
