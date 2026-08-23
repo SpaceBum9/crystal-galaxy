@@ -28,28 +28,29 @@ const ID_RE = /^[a-zA-Z0-9._:-]{1,64}$/;
 export function parseCommand(
   raw: unknown,
 ): { ok: true; command: AutomatonCommand } | { ok: false; error: string } {
-  if (!raw || typeof raw !== "object") return { ok: false, error: "Payload muss ein Objekt sein." };
+  if (!raw || typeof raw !== "object") return { ok: false, error: "Payload must be an object." };
   const o = raw as Record<string, unknown>;
   if (typeof o.automaton_id !== "string" || !ID_RE.test(o.automaton_id)) {
-    return { ok: false, error: "automaton_id ungültig." };
+    return { ok: false, error: "automaton_id invalid." };
   }
   if (!AUTOMATON_ACTIONS.includes(o.action as AutomatonAction)) {
-    return { ok: false, error: "action muss initialize | sync | execute | halt sein." };
+    return { ok: false, error: "action must be initialize | sync | execute | halt." };
   }
   const p = o.parameters;
-  if (!p || typeof p !== "object") return { ok: false, error: "parameters fehlt." };
+  if (!p || typeof p !== "object") return { ok: false, error: "parameters missing." };
   const params = p as Record<string, unknown>;
   if (typeof params.target_node !== "string" || !params.target_node.trim()) {
-    return { ok: false, error: "parameters.target_node ist Pflicht." };
+    return { ok: false, error: "parameters.target_node is required." };
   }
   let threshold: number | undefined;
   if (params.stability_threshold !== undefined) {
     if (
       typeof params.stability_threshold !== "number" ||
+      Number.isNaN(params.stability_threshold) ||
       params.stability_threshold < 0 ||
       params.stability_threshold > 1
     ) {
-      return { ok: false, error: "stability_threshold muss in [0, 1] liegen." };
+      return { ok: false, error: "stability_threshold must be in [0, 1]." };
     }
     threshold = params.stability_threshold;
   }
@@ -77,7 +78,13 @@ export function dispatchLocal(command: AutomatonCommand): DispatchResult {
   if (command.action === "halt" && command.parameters.target_node === "jonas-g") {
     return {
       status: "rejected",
-      error: "ECHOGLAS: keine destruktiven Automationen auf privaten Knoten.",
+      error: "ECHOGLAS: no destructive automation on private nodes.",
+    };
+  }
+  if (command.action === "execute") {
+    return {
+      status: "rejected",
+      error: "ECHOGLAS: execute is overlay-gated. dispatchLocal is not execution.",
     };
   }
   const span = command.parameters.stability_threshold ?? 0.25;
@@ -88,7 +95,7 @@ export function dispatchLocal(command: AutomatonCommand): DispatchResult {
     action_executed: command.action,
     target_node: command.parameters.target_node,
     dispatch_result: "SUCCESS",
-    security_layer: "Semantic Anchoring / schema corridor (local)",
+    security_layer: "schema corridor (local)",
     euclidean: seq,
   };
 }
