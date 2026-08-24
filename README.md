@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> **Consolidated on 2026-08-24.** The canonical location is [SpaceBum9/MCT-2600027 · packages/crystal-galaxy](https://github.com/SpaceBum9/MCT-2600027/tree/main/packages/crystal-galaxy). This repository is retained only for history and open-work provenance. Do not start new work here.
+
 # Crystal Galaxy
 
 **BILO 2026 · HAL for everybody · Crystal Mike**
